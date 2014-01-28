@@ -108,6 +108,7 @@
             this.Controls.Add(this.buttonNewNote);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StickyNotesMain";
             this.Text = "Main Menu";
