@@ -18,6 +18,10 @@ namespace MyStickyNotes.Database
         {
             msgNotesArr[noteID] = msgNote;
         }
+        public void DeleteFromFromDB(int noteID)
+        {
+            msgNotesArr[noteID] = null;
+        }
         
         public void PrintAllNotes()
         {
@@ -32,21 +36,32 @@ namespace MyStickyNotes.Database
             {
                 System.IO.File.Delete("WriteLines.txt");
             }
-                
-            System.IO.File.WriteAllLines(@"WriteLines.txt", msgNotesArr);
-         
+
+            foreach (string item in msgNotesArr)
+            {
+                if (item == null)
+                {
+                    continue;
+                }
+                System.IO.File.AppendAllText(@"WriteLines.txt", item + Environment.NewLine);
+
+                // System.IO.File.WriteAllText(@"WriteLines.txt", item + Environment.NewLine);
+               //System.IO.File.WriteAllLines(@"WriteLines.txt", msgNotesArr);
+            }
         }
 
         public int ReadDBFromFile()
         {
             if(System.IO.File.Exists("WriteLines.txt"))
             {
+                string[] arr = new string[128];
                 int dbSize = 0;
-                msgNotesArr = System.IO.File.ReadAllLines(@"WriteLines.txt");
-                foreach (string item in msgNotesArr)
+                 arr  = System.IO.File.ReadAllLines(@"WriteLines.txt");
+                 foreach (string item in arr)
                 {
                     if (item == "")
                         break;
+                    msgNotesArr[dbSize] = item;
                     dbSize++;
                 }
 

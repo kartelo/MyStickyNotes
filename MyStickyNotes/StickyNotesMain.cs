@@ -11,6 +11,7 @@ namespace MyStickyNotes
 {
     public delegate void FromCallBackDeligate();
     public delegate void DelegateWriteToDB(int id, string msg);
+    public delegate void DelegateDeleteFromDB(int id);
 
     public partial class StickyNotesMain : Form
     {
@@ -19,6 +20,9 @@ namespace MyStickyNotes
         private int currentNote;
         MyStickyNotes.FromCallBackDeligate CBNewForm;
         MyStickyNotes.DelegateWriteToDB writeToDB;
+        MyStickyNotes.DelegateDeleteFromDB DeleteFromDB;
+
+
         MyStickyNotes.Database.NotesDBFile notesDB;
         #endregion
 
@@ -29,6 +33,7 @@ namespace MyStickyNotes
             currentNote = 0;
             CBNewForm = new MyStickyNotes.FromCallBackDeligate(CreateNewNote);
             writeToDB = new MyStickyNotes.DelegateWriteToDB(NoteMessage);
+            DeleteFromDB = new MyStickyNotes.DelegateDeleteFromDB(DeleteNoteFromDB);
             notesDB = new MyStickyNotes.Database.NotesDBFile();
             currentNote = notesDB.ReadDBFromFile();
             if (currentNote != 0)
@@ -46,7 +51,7 @@ namespace MyStickyNotes
             tmpCur--;
             for (int i = tmpCur; i >= 0; i--)
             {
-                notesArr[i] = new MyStickyNotes.Contols.NoteMain(i, CBNewForm, writeToDB);
+                notesArr[i] = new MyStickyNotes.Contols.NoteMain(i, CBNewForm, writeToDB, DeleteFromDB);
                 notesArr[i].Show();
                 notesArr[i].setNoteMessage(notesDB.GetMsgFromID(i));
             }
@@ -73,7 +78,7 @@ namespace MyStickyNotes
         #region Function callbacks
         private void CreateNewNote()
         {
-            notesArr[currentNote] = new MyStickyNotes.Contols.NoteMain(currentNote, CBNewForm, writeToDB);
+            notesArr[currentNote] = new MyStickyNotes.Contols.NoteMain(currentNote, CBNewForm, writeToDB, DeleteFromDB);
             notesArr[currentNote].Show();
             currentNote++;
         }
@@ -81,6 +86,11 @@ namespace MyStickyNotes
         private void NoteMessage(int ID,string msgNote)
         {
             notesDB.WriteMsgInDB(ID, msgNote);
+        }
+
+        private void DeleteNoteFromDB(int ID)
+        {
+          notesDB.DeleteFromFromDB(ID);
         }
 
         #endregion

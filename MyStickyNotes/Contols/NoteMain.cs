@@ -15,6 +15,7 @@ namespace MyStickyNotes.Contols
         private String noteMessage;
         MyStickyNotes.FromCallBackDeligate createNewNote;
         MyStickyNotes.DelegateWriteToDB writeMsgToDB;
+        MyStickyNotes.DelegateDeleteFromDB deleteNoteFromDB;
         private int noteID;
 
         private NoteMain()
@@ -23,12 +24,13 @@ namespace MyStickyNotes.Contols
             noteMessage = "None";
         }
 
-        public NoteMain(int ID, FromCallBackDeligate newFormCB, DelegateWriteToDB writeMsgCB)
+        public NoteMain(int ID, FromCallBackDeligate newFormCB, DelegateWriteToDB writeMsgCB, MyStickyNotes.DelegateDeleteFromDB deleteFromDB)
         {
             InitializeComponent();
           //  noteMessage = "None";
             createNewNote = newFormCB;
             writeMsgToDB = writeMsgCB;
+            deleteNoteFromDB = deleteFromDB;
             noteID = ID;
         }
 
@@ -39,6 +41,7 @@ namespace MyStickyNotes.Contols
 
         private void DeleteNote_Click(object sender, EventArgs e)
         {
+            deleteNoteFromDB(noteID);
             this.Close();
         }
 
