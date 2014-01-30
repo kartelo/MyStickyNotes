@@ -35,32 +35,35 @@
             // 
             // NewNoteButton
             // 
-            this.NewNoteButton.Location = new System.Drawing.Point(13, 13);
+            this.NewNoteButton.BackColor = System.Drawing.Color.Khaki;
+            this.NewNoteButton.Location = new System.Drawing.Point(12, 12);
             this.NewNoteButton.Name = "NewNoteButton";
-            this.NewNoteButton.Size = new System.Drawing.Size(75, 23);
+            this.NewNoteButton.Size = new System.Drawing.Size(42, 23);
             this.NewNoteButton.TabIndex = 0;
             this.NewNoteButton.Text = "New Note";
-            this.NewNoteButton.UseVisualStyleBackColor = true;
+            this.NewNoteButton.UseVisualStyleBackColor = false;
             this.NewNoteButton.Click += new System.EventHandler(this.NewNote_Click);
             // 
             // DeleteNoteButton
             // 
-            this.DeleteNoteButton.Location = new System.Drawing.Point(197, 12);
+            this.DeleteNoteButton.BackColor = System.Drawing.Color.Khaki;
+            this.DeleteNoteButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.DeleteNoteButton.Location = new System.Drawing.Point(173, 13);
             this.DeleteNoteButton.Name = "DeleteNoteButton";
-            this.DeleteNoteButton.Size = new System.Drawing.Size(75, 23);
+            this.DeleteNoteButton.Size = new System.Drawing.Size(46, 23);
             this.DeleteNoteButton.TabIndex = 1;
             this.DeleteNoteButton.Text = "Delete Note";
-            this.DeleteNoteButton.UseVisualStyleBackColor = true;
+            this.DeleteNoteButton.UseVisualStyleBackColor = false;
             this.DeleteNoteButton.Click += new System.EventHandler(this.DeleteNote_Click);
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox1.Location = new System.Drawing.Point(12, 42);
+            this.textBox1.Location = new System.Drawing.Point(0, 42);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(259, 188);
+            this.textBox1.Size = new System.Drawing.Size(232, 205);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -69,11 +72,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(284, 241);
+            this.ClientSize = new System.Drawing.Size(231, 247);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.DeleteNoteButton);
             this.Controls.Add(this.NewNoteButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "NoteMain";
             this.ShowInTaskbar = false;

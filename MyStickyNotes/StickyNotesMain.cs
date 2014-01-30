@@ -36,6 +36,8 @@ namespace MyStickyNotes
             DeleteFromDB = new MyStickyNotes.DelegateDeleteFromDB(DeleteNoteFromDB);
             notesDB = new MyStickyNotes.Database.NotesDBFile();
             currentNote = notesDB.ReadDBFromFile();
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
+
             if (currentNote != 0)
                 ConstructNotes();
         }
@@ -66,12 +68,20 @@ namespace MyStickyNotes
  
         private void buttonShowAllNotes_Click(object sender, EventArgs e)
         {
-
+            foreach (MyStickyNotes.Contols.NoteMain item in notesArr)
+            {
+                if (item != null)
+                    item.Visible = true;
+            }
         }
 
         private void buttonHideAllNotes_Click(object sender, EventArgs e)
         {
-            notesDB.PrintAllNotes();
+            foreach (MyStickyNotes.Contols.NoteMain item in notesArr)
+            {
+                if(item != null)
+                    item.Visible = false;
+            }
         }
         #endregion
 
@@ -90,10 +100,31 @@ namespace MyStickyNotes
 
         private void DeleteNoteFromDB(int ID)
         {
-          notesDB.DeleteFromFromDB(ID);
+            notesArr[ID] = null;
+           notesDB.DeleteFromFromDB(ID);
         }
 
         #endregion
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            notifyIcon1.Visible = false;
+            this.Show();
+            this.BringToFront();
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(500);
+                this.Hide();
+            }
+            else if (FormWindowState.Normal == this.WindowState)
+            {
+                notifyIcon1.Visible = false;
+            }
+        }
     }
 }

@@ -32,6 +32,8 @@ namespace MyStickyNotes.Contols
             writeMsgToDB = writeMsgCB;
             deleteNoteFromDB = deleteFromDB;
             noteID = ID;
+
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
         }
 
         public void setNoteMessage(string msg)
@@ -42,7 +44,7 @@ namespace MyStickyNotes.Contols
         private void DeleteNote_Click(object sender, EventArgs e)
         {
             deleteNoteFromDB(noteID);
-            this.Close();
+            this.Dispose();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -54,6 +56,12 @@ namespace MyStickyNotes.Contols
         private void NewNote_Click(object sender, EventArgs e)
         {
             this.createNewNote();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Visible = false;
+            e.Cancel = true;
         }
     }
 }
